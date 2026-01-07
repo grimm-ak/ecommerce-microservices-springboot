@@ -1,150 +1,203 @@
-Ecommerce Microservices Backend (Spring Boot)
+# 🛒 E‑Commerce Microservices Platform
 
-A production‑style microservices‑based e‑commerce backend built using Java and Spring Boot, designed to demonstrate scalable backend architecture, service isolation, and inter‑service communication.This project focuses on backend engineering principles rather than UI, and closely follows patterns used in real‑world distributed systems.
+A **scalable, event‑driven microservices architecture** for an e‑commerce platform built using **Spring Boot** and **Spring Cloud**. This project demonstrates real‑world backend engineering practices such as service isolation, asynchronous communication, containerization, and API‑first design.
 
-📌 Key Features
+---
 
-Microservices architecture with independent services
+## 🚀 Features
 
-API Gateway for centralized routing
+* **Product Service**: Product catalog management using MongoDB
+* **Inventory Service**: Real‑time inventory tracking backed by MySQL
+* **Order Service**: Order processing with event‑driven architecture
+* **Notification Service**: Email notifications for order lifecycle events
+* **API Gateway**: Single entry point with centralized routing
+* **Event‑Driven Architecture**: Apache Kafka for asynchronous communication
+* **Containerized Setup**: Docker & Docker Compose for easy local deployment
+* **API Documentation**: Integrated Swagger / OpenAPI for all services
 
-Product, Order, Inventory, and Notification services
+---
 
-RESTful APIs with clear separation of concerns
+## 🛠️ Tech Stack
 
-Containerized infrastructure using Docker Compose
+* **Java**: 17+
+* **Spring Boot**: 3.x
+* **Spring Cloud**: 2023.x
+* **Spring Data**: MongoDB & JPA
+* **Messaging**: Apache Kafka
+* **Databases**: MySQL, MongoDB
+* **Containerization**: Docker & Docker Compose
+* **API Spec**: OpenAPI 3.0
+* **Build Tool**: Maven
 
-Asynchronous communication (Kafka where applicable)
+---
 
-Database persistence using Spring Data JPA / MongoDB
+## 📦 Prerequisites
 
-🏗 Architecture Overview
+* Java 17 or later
+* Docker Desktop (with Docker Compose)
+* Maven 3.9+
+* Git
 
-Client
-  │
-  ▼
-API Gateway
-  │
-  ├── Product Service
-  ├── Order Service
-  ├── Inventory Service
-  └── Notification Service
+---
 
-Each service:
+## 🚀 Quick Start
 
-Is a standalone Spring Boot application
+### 1️⃣ Clone the repository
 
-Has its own database
+```bash
+git clone https://github.com/grimm-ak/ecommerce-microservices-springboot.git
+cd ecommerce-microservices-springboot
+```
 
-Can be developed, deployed, and scaled independently
+### 2️⃣ Build the project
 
-🛠 Tech Stack
-
-Language: Java 17
-
-Framework: Spring Boot, Spring Cloud
-
-API: REST (JSON)
-
-Databases: MySQL, MongoDB
-
-Messaging: Kafka
-
-Build Tool: Maven
-
-Containerization: Docker & Docker Compose
-
-📂 Project Structure
-
-api-gateway/
-product-service/
-order-service/
-inventory-service/
-notification-service/
-docker-compose.yml
-
-▶ How to Run Locally
-
-This project is designed to run in a Docker‑based environment.
-
-Prerequisites
-
-Java 17+
-
-Maven
-
-Docker & Docker Compose
-
-Steps
-
-# Build all services
+```bash
 mvn clean install
+```
 
-# Start infrastructure and services
+### 3️⃣ Start all services
+
+```bash
 docker-compose up -d
+```
 
-Verify Services
+This will start all services along with required infrastructure such as **Kafka**, **MySQL**, and **MongoDB**.
 
-API Gateway: http://localhost:8080
+### 4️⃣ Verify running containers
 
-Product Service: http://localhost:8081
+```bash
+docker-compose ps
+```
 
-Order Service: http://localhost:8082
+---
 
-Inventory Service: http://localhost:8083
+## 🌐 Access Services
 
-📡 Sample API Endpoints
+| Service              | URL                                            | Port |
+| -------------------- | ---------------------------------------------- | ---- |
+| API Gateway          | [http://localhost:8080](http://localhost:8080) | 8080 |
+| Product Service      | [http://localhost:8081](http://localhost:8081) | 8081 |
+| Inventory Service    | [http://localhost:8082](http://localhost:8082) | 8082 |
+| Order Service        | [http://localhost:8083](http://localhost:8083) | 8083 |
+| Notification Service | [http://localhost:8084](http://localhost:8084) | 8084 |
 
-Create Product
+---
 
-POST /api/products
-Content-Type: application/json
+## 📚 API Documentation
 
-{
-  "name": "iPhone",
-  "price": 999.99
-}
+Swagger UI is available for easy API exploration:
 
-Place Order
+* **API Gateway (All Services)**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+* **Product Service**: [http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html)
+* **Inventory Service**: [http://localhost:8082/swagger-ui.html](http://localhost:8082/swagger-ui.html)
+* **Order Service**: [http://localhost:8083/swagger-ui.html](http://localhost:8083/swagger-ui.html)
 
-POST /api/orders
-Content-Type: application/json
+---
 
-{
-  "skuCode": "iphone_15",
-  "quantity": 1
-}
+## 🧪 Running Tests
 
-🔍 Design Highlights
+Run tests for all services:
 
-Clear Controller → Service → Repository layering
+```bash
+mvn test
+```
 
-Database transactions and consistency handling
+Run tests for a specific service:
 
-Inter‑service communication via REST / messaging
+```bash
+cd <service-directory>
+mvn test
+```
 
-Fault‑tolerant design with service isolation
+---
 
-Scalable and extensible architecture
+## 🧩 Project Structure
 
-🧪 Testing
+```
+.
+├── api-gateway/           # API Gateway service
+├── product-service/       # Product management service
+├── inventory-service/     # Inventory management service
+├── order-service/         # Order processing service
+├── notification-service/  # Notification service
+├── docker-compose.yml     # Docker Compose configuration
+└── README.md              # Project documentation
+```
 
-Unit testing support using Spring Boot Test
+---
 
-APIs can be tested via Postman or curl
+## 🔄 Service Communication
 
-Swagger UI can be enabled per service (if configured)
+* **Synchronous**: REST APIs over HTTP
+* **Asynchronous**: Apache Kafka for event‑driven messaging
 
-📄 License
+---
 
-This project is licensed under the MIT License.
+## 🔒 Configuration & Environment Variables
 
-See the LICENSE file for details.
+* Each service contains its own `application.yml`
+* Environment‑specific overrides can be provided via `docker-compose.yml`
+* Sensitive configuration is excluded via `.gitignore`
 
-👤 Author
+---
 
-Aman Kumar SinghGitHub: https://github.com/grimm-ak
+## 🐛 Debugging
 
-📌 Note for Recruiters
+To debug a specific service locally:
 
-This project is intentionally backend‑focused to demonstrate system design, microservices architecture, and Java/Spring expertise. Frontend is omitted by design.
+1. Stop the container:
+
+```bash
+docker-compose stop <service-name>
+```
+
+2. Run service in debug mode:
+
+```bash
+cd <service-directory>
+mvn spring-boot:run \
+  -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+```
+
+3. Attach your IDE debugger to port **5005**
+
+---
+
+## 🧹 Clean Up
+
+Stop and remove all containers, networks, and volumes:
+
+```bash
+docker-compose down -v
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
+See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👤 Author
+
+**Aman Kumar Singh**
+GitHub: [https://github.com/grimm-ak](https://github.com/grimm-ak)
+
+---
+
+## 📌 Note for Recruiters
+
+This repository focuses on **backend system design, microservices architecture, and Java/Spring expertise**.
+Frontend/UI is intentionally omitted to emphasize backend scalability and engineering principles.
